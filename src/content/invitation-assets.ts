@@ -65,7 +65,7 @@ export const invitationAssets = {
     cutout: asset(parkingCutout, ""),
   },
   dressCode: {
-    couple: asset(dressCodeCouple, "Victoria and Dorian embracing", "50% 45%"),
+    couple: asset(dressCodeCouple, "Victoria and Dorian embracing", "25% 45%"),
     cutout: asset(dressCodeCutout, ""),
   },
   gardenFormal: {
@@ -83,7 +83,7 @@ export const invitationAssets = {
     gentlemen: asset(gardenFormalGentlemen, "Examples of light garden-formal attire for men"),
   },
   weddingParty: {
-    couple: asset(weddingPartyCouple, "Victoria and Dorian holding hands in a garden", "50% 50%"),
+    couple: asset(weddingPartyCouple, "Victoria and Dorian holding hands in a garden", "45% 50%"),
     cutout: asset(weddingPartyCutout, ""),
   },
   rsvp: {
@@ -99,7 +99,7 @@ export const invitationAssets = {
     couple: asset(
       closingMirror,
       "Victoria and Dorian reflected in a convertible mirror",
-      "50% 50%",
+      "59% 50%",
     ),
   },
   directions: {
