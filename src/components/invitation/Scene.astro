@@ -13,6 +13,7 @@ interface Props {
   eager?: boolean;
   minHeight?: string;
   align?: "center" | "start";
+  positionMobile?: `${number}% ${number}%`;
   class?: string;
 }
 
@@ -23,8 +24,14 @@ const {
   eager = false,
   minHeight = "min-h-svh",
   align = "center",
+  positionMobile,
   class: className,
 } = Astro.props;
+
+const defaultPos = image.position ?? "50% 50%";
+const mobilePos = positionMobile ?? defaultPos;
+const [dx, dy] = defaultPos.split(" ");
+const [mx, my] = mobilePos.split(" ");
 ---
 
 <section
@@ -45,11 +52,22 @@ const {
     sizes="100vw"
     loading={eager ? "eager" : "lazy"}
     fetchpriority={eager ? "high" : "auto"}
-    class="absolute inset-0 -z-20 size-full object-cover"
-    style={`object-position: ${image.position ?? "50% 50%"}`}
+    class="scene-img absolute inset-0 -z-20 size-full object-cover"
+    style={`--obj-x: ${dx}; --obj-y: ${dy}; --obj-mx: ${mx}; --obj-my: ${my}`}
   />
   <div class="absolute inset-0 -z-10 bg-linear-to-b from-black/25 via-black/40 to-black/65"></div>
   <div class="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-16">
     <slot />
   </div>
 </section>
+
+<style>
+  .scene-img {
+    object-position: var(--obj-mx) var(--obj-my);
+  }
+  @media (min-width: 640px) {
+    .scene-img {
+      object-position: var(--obj-x) var(--obj-y);
+    }
+  }
+</style>
