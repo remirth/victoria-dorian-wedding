@@ -8,15 +8,20 @@ interface Props {
 }
 
 const { src, class: className } = Astro.props;
+const showCutout = false;
 ---
 
-<Image
-  src={src}
-  alt=""
-  aria-hidden="true"
-  loading="lazy"
-  width={1200}
-  format="webp"
-  class:list={["pointer-events-none absolute z-0 hidden object-contain lg:block", className]}
-  data-depth-layer="foreground"
-/>
+{
+  showCutout && (
+    <Image
+      src={src}
+      alt=""
+      aria-hidden="true"
+      loading="lazy"
+      width={1200}
+      format="webp"
+      class:list={["pointer-events-none absolute z-0 hidden object-contain lg:block", className]}
+      data-depth-layer="foreground"
+    />
+  )
+}
