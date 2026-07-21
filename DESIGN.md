@@ -1,6 +1,7 @@
 # Victoria & Dorian Wedding Invitation: Technical Design
 
-Status: Draft for approval  
+Status: Approved for implementation
+
 Last updated: 21 July 2026
 
 ## 1. Summary
@@ -67,16 +68,15 @@ Strict full-page snapping is therefore unsuitable for the entire site. It would 
 
 These values should become Tailwind theme tokens rather than repeated arbitrary values.
 
-### 4.3 Content and design discrepancies
+### 4.3 Content decisions
 
-The following items require owner confirmation before content lock:
-
-- Closing hashtag: `#TheBrightestMix` or hidden alternate `#TheBrightestMixForever`.
-- The FAQ refers to an accommodations section that is not published.
-- The published `Finding Your Way` section appears last, separate from `Parking and Directions`.
-- Venue naming varies between "Narra Hill, Batangas" and the full Narra Hill Tagaytay address.
-- Verify wedding-party name spellings, especially Vector Julius Maliuanag, Oral Binda, Odette Llige, and Luis Solarzano.
-- Confirm whether every visible image, Canva element, cutout, and font is licensed for use outside the Canva-hosted page.
+- Use `#TheBrightestMix`, matching the published closing section.
+- Keep the existing accommodations FAQ wording for the first release. Do not add an empty or coming-soon accommodations section.
+- Keep `Finding Your Way` as the final section, separate from `Parking and Directions`.
+- Use context-dependent venue wording: "Narra Hill, Batangas" in concise display contexts and the full Narra Hill Tagaytay address in venue and directions content.
+- The current RSVP form and deadline are final: <https://forms.gle/Gvq1CeDJdfzyDSZ57>, 31 July 2026 at 11:59 PM.
+- The owner has confirmed that the Canva photographs, cutouts, map, and decorative elements are approved for reuse on this site. Preserve provenance and prefer supplied originals if they become available.
+- All wedding-party names were approved on 21 July 2026. Standardize the family surname as `Maliuanag`, including Joel Maliuanag, and use `Carisse Betina Tabora` with one `t` in Betina. Keep Vector Julius Maliuanag, Oral Binda, Odette Llige, Luis Solarzano, and Gianluk Santos exactly as approved.
 
 ## 5. Proposed Experience
 
@@ -88,11 +88,13 @@ The following items require owner confirmation before content lock:
 4. Focus moves to the invitation heading after the transition. The action is a real `<button>` and works with keyboard input.
 5. If reduced motion is requested, the cover crossfades directly to the hero in no more than 200 ms.
 
-The opened state should last for the current tab in `sessionStorage`, with a visible "View invitation cover" control to replay it. This avoids replaying a long entrance after an accidental refresh while retaining access to the artwork. This behavior needs product confirmation.
+The opened state lasts for the current tab in `sessionStorage`, with a visible "View invitation cover" control to replay it. This avoids replaying a long entrance after an accidental refresh while retaining access to the artwork.
+
+The approved visual direction is cream paper, warm-gold detailing, and a deep berry or terracotta seal. It should use invitation typography and custom decorative artwork rather than emoji.
 
 ### 5.2 Scrolling and scene transitions
 
-The invitation remains one vertical document. A scene is not necessarily equivalent to one Canva section.
+The approved invitation experience is one vertical document with hybrid scrolling. A scene is not necessarily equivalent to one Canva section.
 
 - Short photographic sections use `min-height: 100svh` and optional `scroll-snap-align: start`.
 - Long text sections use natural height and no snap requirement.
@@ -149,7 +151,7 @@ The referenced component is MIT licensed and is suitable as inspiration, but it 
 Required adaptation:
 
 - Remove Next.js `useSearchParams` and `react-i18next` dependencies.
-- Read optional guest personalization from `window.location.search` after hydration, or omit it in version one.
+- Remove guest personalization and render one shared invitation greeting.
 - Replace emoji hearts, seal, sparkles, pointer, and spinner with artwork matching this invitation.
 - Replace fixed dimensions with fluid `clamp()` sizing.
 - Use deterministic particle coordinates instead of `Math.random()` during render to avoid hydration instability.
@@ -209,14 +211,15 @@ src/
 ### 7.1 Acquisition workflow
 
 1. Create an asset manifest containing source Canva URL, Canva media identifier, intended section, dimensions, file hash, rights status, and local output path.
-2. Prefer originals supplied by the couple or photographer.
-3. Use Canva's highest-resolution unwatermarked derivative only when an original is unavailable and reuse rights are confirmed.
+2. Prefer originals supplied by the couple or photographer when available.
+3. The owner has approved reuse of the captured Canva derivatives; record that approval and the original Canva URL in the manifest.
 4. Preserve source files outside the generated output directories.
-5. Generate responsive AVIF and WebP derivatives at practical widths such as 640, 960, 1440, and 1920 px.
-6. Visually compare focal crops against the Canva desktop and mobile views.
-7. Commit only assets approved for deployment.
+5. Store approved originals in `src/assets/invitation/` and import them through typed metadata.
+6. Use Astro's `<Image>` and `<Picture>` components to generate responsive AVIF/WebP derivatives at build time after each layout's actual display width is known.
+7. Visually compare generated focal crops against the Canva desktop and mobile views.
+8. Commit source assets, not generated derivatives.
 
-Production must not depend on Canva's hashed URLs. They are currently public but can disappear if the Canva site is republished or removed. A public, unwatermarked file is not proof of reuse rights.
+Production must not depend on Canva's hashed URLs. They are currently public but can disappear if the Canva site is republished or removed. Owner approval for this project is recorded, but public availability and absence of a watermark do not independently establish reuse rights.
 
 ### 7.2 Image delivery
 
@@ -229,10 +232,10 @@ Production must not depend on Canva's hashed URLs. They are currently public but
 
 ### 7.3 Font plan
 
-- Serif: Playfair Display, subject to final typography approval.
-- Sans-serif: use a licensed Garet file or choose a metrically acceptable geometric sans substitute.
-- Script: obtain explicit webfont licenses for Snell Roundhand and Apricots, or approve a licensed substitute.
-- Self-host WOFF2 subsets after license review to avoid third-party font requests and reduce transfer size.
+- Serif: Playfair Display variable, preserving the original Canva serif for body copy and editorial details.
+- Sans-serif: Urbanist variable as the approved open-source alternative to Garet.
+- Script: Pinyon Script 400 as the approved open-source alternative to Snell Roundhand.
+- Self-host WOFF2 files through Fontsource packages; all selected families use the SIL Open Font License 1.1.
 - Use `font-display: swap` and fallback metrics to limit layout shift.
 
 ## 8. Content Model
@@ -257,9 +260,9 @@ interface WeddingPartyGroup {
 }
 ```
 
-The wedding date should be represented once as an ISO timestamp with an explicit Philippine time-zone offset where calculations are needed. Display strings can remain editorially controlled. The current RSVP URL is <https://forms.gle/Gvq1CeDJdfzyDSZ57>, and the displayed deadline is 31 July 2026 at 11:59 PM; both must be confirmed before launch.
+The wedding date should be represented once as an ISO timestamp with an explicit Philippine time-zone offset where calculations are needed. Display strings can remain editorially controlled. The approved RSVP URL is <https://forms.gle/Gvq1CeDJdfzyDSZ57>, and the final displayed deadline is 31 July 2026 at 11:59 PM.
 
-Guest personalization through `?to=` is optional. If enabled, it must be escaped as ordinary React text, excluded from analytics, and fall back gracefully when absent.
+Guest-name personalization is not required. Do not parse or render a `?to=` parameter.
 
 ## 9. Accessibility and Motion Safety
 
@@ -298,11 +301,12 @@ Implementation rules:
 
 - Replace the starter title and favicons.
 - Add canonical URL, description, Open Graph/Twitter metadata, and an approved social image.
+- Add `noindex, nofollow` robots directives and an equivalent `robots.txt` policy because this personal invitation should not appear in search results. This is a privacy preference, not access control; anyone with the URL can still view the static site.
 - Add structured `Event` data only after all date, location, and attendance details are final.
 - Do not expose private guest data in static files or query-string analytics.
-- Add analytics only with explicit approval; the invitation itself requires no cookies.
+- Do not add analytics, tracking scripts, or cookies.
 - Build with `pnpm build` and deploy `dist/` using the existing Cloudflare Pages configuration.
-- Configure the final custom domain in Astro's `site` value before launch.
+- Continue using `https://victoria-dorian-wedding.pages.dev` as the canonical site until a custom domain is supplied.
 - Add cache headers for immutable hashed assets and sensible security headers through Cloudflare Pages configuration if needed.
 - Preserve a fully static output; no secrets are required for the RSVP link.
 
@@ -337,34 +341,33 @@ Model tier is based on ambiguity and reasoning risk, not token volume. Asset pro
 
 ### 13.2 Task matrix
 
-| ID  | Task                                                    | Depends on | Model               | Computer | Deliverable / acceptance                                         |
-| --- | ------------------------------------------------------- | ---------- | ------------------- | -------- | ---------------------------------------------------------------- |
-| D1  | Resolve content discrepancies and approve section order | None       | Human + H           | Low      | Signed-off copy and ordering                                     |
-| A1  | Extract Canva media manifest and map assets to sections | D1         | H                   | Medium   | Reviewed manifest with no unidentified visible asset             |
-| A2  | Confirm licenses and collect original photos/fonts      | A1         | Human               | Low      | Rights status recorded for every deployed asset                  |
-| A3  | Download approved source assets with hashes             | A2         | L/script            | Medium   | Reproducible local source set                                    |
-| A4  | Generate AVIF/WebP sizes and inspect quality            | A3         | L/script + M review | **High** | Responsive derivatives within visual/size targets                |
-| F1  | Define color, type, spacing, and effect tokens          | D1         | M                   | Low      | Tailwind/CSS tokens match approved visual system                 |
-| F2  | Build semantic content model and static Astro sections  | D1, A1     | M                   | Medium   | Complete readable page without JavaScript                        |
-| F3  | Recreate responsive editorial compositions              | A4, F1, F2 | H                   | Medium   | Visual approval at target breakpoints                            |
-| M1  | Prototype envelope geometry and states                  | A4, F1     | H                   | Medium   | Approved open/skip/replay prototype                              |
-| M2  | Integrate accessible envelope React island              | M1, F2     | M                   | Low      | Keyboard, focus, session, and no-JS behavior pass                |
-| M3  | Prototype one photo scene transition                    | F3         | H                   | Medium   | Approved wipe/parallax pattern on desktop and mobile             |
-| M4  | Apply approved motion families to remaining scenes      | M3         | M                   | Medium   | Consistent motion with no scroll trapping                        |
-| M5  | Implement reduced-motion and offscreen controls         | M2, M4     | M                   | Low      | Motion safety checks pass                                        |
-| Q1  | Cross-browser responsive visual QA                      | F3, M5     | M                   | **High** | Screenshot matrix reviewed; defects logged/fixed                 |
-| Q2  | Performance profiling and animation tuning              | M5, A4     | H                   | **High** | Budgets and Core Web Vitals targets met or exceptions documented |
-| Q3  | Accessibility and content audit                         | M5, D1     | H                   | Medium   | WCAG issues resolved and content signed off                      |
-| R1  | Metadata, final domain, headers, and production build   | Q1, Q2, Q3 | M                   | Low      | Production-ready `dist/` and valid metadata                      |
-| R2  | Deploy and smoke-test Cloudflare Pages                  | R1         | L + M review        | Medium   | Public URL passes navigation, assets, and RSVP checks            |
+| ID  | Task                                                    | Depends on | Model        | Computer | Deliverable / acceptance                                         |
+| --- | ------------------------------------------------------- | ---------- | ------------ | -------- | ---------------------------------------------------------------- |
+| A1  | Extract Canva media manifest and map assets to sections | None       | H            | Medium   | Reviewed manifest with no unidentified visible asset             |
+| A2  | Record approval and collect originals when available    | A1         | Human + L    | Low      | Provenance recorded for every deployed asset                     |
+| A3  | Download approved source assets with hashes             | A2         | L/script     | Medium   | Reproducible local source set                                    |
+| A4  | Configure Astro responsive images and inspect output    | A3, F2     | M            | **High** | Generated derivatives meet visual and transfer-size targets      |
+| F1  | Define color, type, spacing, and effect tokens          | None       | M            | Low      | Tailwind/CSS tokens match approved visual system                 |
+| F2  | Build semantic content model and static Astro sections  | A1         | M            | Medium   | Complete readable page without JavaScript                        |
+| F3  | Recreate responsive editorial compositions              | A4, F1, F2 | H            | Medium   | Visual approval at target breakpoints                            |
+| M1  | Prototype envelope geometry and states                  | A4, F1     | H            | Medium   | Approved open/skip/replay prototype                              |
+| M2  | Integrate accessible envelope React island              | M1, F2     | M            | Low      | Keyboard, focus, session, and no-JS behavior pass                |
+| M3  | Prototype one photo scene transition                    | F3         | H            | Medium   | Approved wipe/parallax pattern on desktop and mobile             |
+| M4  | Apply approved motion families to remaining scenes      | M3         | M            | Medium   | Consistent motion with no scroll trapping                        |
+| M5  | Implement reduced-motion and offscreen controls         | M2, M4     | M            | Low      | Motion safety checks pass                                        |
+| Q1  | Cross-browser responsive visual QA                      | F3, M5     | M            | **High** | Screenshot matrix reviewed; defects logged/fixed                 |
+| Q2  | Performance profiling and animation tuning              | M5, A4     | H            | **High** | Budgets and Core Web Vitals targets met or exceptions documented |
+| Q3  | Accessibility, privacy, and content audit               | M5         | H            | Medium   | WCAG, no-index, and content requirements signed off              |
+| R1  | Metadata, final domain, headers, and production build   | Q1, Q2, Q3 | M            | Low      | Production-ready `dist/` and valid metadata                      |
+| R2  | Deploy and smoke-test Cloudflare Pages                  | R1         | L + M review | Medium   | Public URL passes navigation, assets, and RSVP checks            |
 
 ### 13.3 Parallelization
 
-After D1, the asset track (A1-A4) and foundation track (F1-F2) can proceed in parallel. M1 can start once envelope artwork and tokens exist. F3 needs optimized representative assets, while content-only section implementation does not. Q1, Q2, and Q3 can run in parallel after feature completion, but each finding must be resolved before R1.
+The asset track (A1-A4) and foundation tasks F1-F2 can begin in parallel. M1 can start once envelope artwork and tokens exist. F3 needs optimized representative assets, while content-only section implementation does not. Q1, Q2, and Q3 can run in parallel after feature completion, but each finding must be resolved before R1.
 
 High-computer tasks are A4, Q1, and Q2:
 
-- A4 performs repeated image encoding and quality comparison.
+- A4 performs repeated Astro builds, image encoding, and quality comparison.
 - Q1 renders a browser and captures many viewport/browser combinations.
 - Q2 requires production builds, browser traces, and repeated measurements.
 
@@ -375,7 +378,7 @@ These should run on agents with browser/tool access and generous execution time.
 | Risk                                     | Impact                                | Mitigation                                                         |
 | ---------------------------------------- | ------------------------------------- | ------------------------------------------------------------------ |
 | Canva URL or media disappears            | Missing source reference              | Download approved assets early and store locally                   |
-| Unclear photo/font/element rights        | Launch or legal blocker               | Require rights status before assets enter production               |
+| Asset approval lacks durable provenance  | Future reuse uncertainty              | Record owner approval, source URLs, and replacement originals      |
 | Full-screen behavior clips long content  | Unusable mobile experience            | Hybrid scenes, natural flow, proximity-only snap                   |
 | Excess motion causes discomfort          | Accessibility failure                 | Reduced-motion mode and restrained motion budget                   |
 | Large photography slows LCP              | Poor mobile experience                | Responsive formats, focal crops, preload only critical art         |
@@ -394,19 +397,33 @@ The first production release is complete when:
 - Short scenes feel cinematic without trapping scroll; long sections remain naturally readable.
 - Desktop and mobile layouts have owner visual approval.
 - RSVP opens the approved form and all invitation details are signed off.
+- Search engines are instructed not to index or follow the invitation, and no analytics or cookies are present.
 - Lint, formatting, Astro type checks, and production build pass.
 - Accessibility, cross-browser, and production performance checks meet the documented targets or have explicitly accepted exceptions.
 - The static site is deployed and smoke-tested on the final Cloudflare Pages domain.
 
-## 16. Decisions Needed
+## 16. Decision Record
 
-1. Confirm the final hashtag.
-2. Decide whether to add an accommodations section or remove its FAQ reference.
-3. Confirm `Finding Your Way` placement and the canonical venue wording.
-4. Approve or correct all wedding-party names.
-5. Confirm that Canva and photographer assets may be downloaded and redeployed.
-6. Select licensed final fonts or approve substitutions.
-7. Approve the hybrid scroll treatment instead of mandatory full-screen snapping.
-8. Confirm whether the envelope should remember its opened state for the browser tab.
-9. Confirm whether personalized guest links such as `?to=Guest%20Name` are required.
-10. Provide the final custom domain and social-sharing image preference.
+Approved on 21 July 2026:
+
+| Decision              | Approved direction                                                               |
+| --------------------- | -------------------------------------------------------------------------------- |
+| Scrolling             | Hybrid: cinematic full-height scenes plus natural long-form sections             |
+| Closing hashtag       | `#TheBrightestMix`                                                               |
+| Accommodations        | Keep the existing FAQ wording; add no placeholder section                        |
+| Directions            | Keep `Finding Your Way` at the end                                               |
+| Venue text            | Short wording in display contexts; full address in detailed contexts             |
+| Canva media           | Approved for reuse on this site                                                  |
+| Fonts                 | Pinyon Script, Playfair Display, and Urbanist; self-hosted under OFL 1.1         |
+| Envelope              | Match invitation palette; remember opened state per browser tab and allow replay |
+| Guest personalization | None                                                                             |
+| RSVP                  | Current Google Form and 31 July 2026 at 11:59 PM deadline are final              |
+| Search privacy        | `noindex, nofollow`                                                              |
+| Analytics             | None                                                                             |
+| Domain                | Use the existing Cloudflare Pages domain for now                                 |
+| Wedding-party names   | Approved; standardize `Maliuanag` and use `Carisse Betina Tabora`                |
+
+Remaining owner input:
+
+1. Approve the final social-sharing image when the visual implementation is ready.
+2. Supply a custom domain later if desired.

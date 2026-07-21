@@ -18,7 +18,8 @@ The snapshot does not include Canva JavaScript runtimes, footer resources, hidde
 
 - Do not hotlink the Canva URLs in production.
 - Do not serve this directory directly.
-- Confirm reuse rights for photographs, cutouts, map art, Canva elements, and fonts before deployment.
+- The owner confirmed on 21 July 2026 that the captured photographs, cutouts, map art, and Canva decorative elements may be reused on this site. This project-specific approval does not establish broader redistribution rights.
+- Font binaries are not covered by that approval; use separately licensed fonts.
 - Prefer original files supplied by the couple or photographer over these processed derivatives.
 - `watermarked: false` in Canva metadata does not establish ownership or redistribution rights.
 

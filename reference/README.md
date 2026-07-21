@@ -14,7 +14,7 @@ See the README in each source directory for provenance and usage restrictions. U
 
 ## Important
 
-This snapshot is implementation reference material, not a production asset library. Public availability and absence of a watermark do not establish redistribution rights. Confirm rights before copying any Canva media or font into `src/` or `public/`.
+This snapshot is implementation reference material, not a production asset library. The owner confirmed on 21 July 2026 that the captured Canva photographs, cutouts, map, and decorative elements are approved for this site. Record provenance when promoting them into `src/` or `public/`. Font binaries were not approved or captured; use separately licensed fonts.
 
 To verify the snapshot from this directory:
 

@@ -1,6 +1,11 @@
 # Published Canva Copy
 
-Captured and normalized from the 12 visible sections on 21 July 2026. Line wrapping is normalized. Confirm all wording before production.
+Captured and normalized from the 12 visible sections on 21 July 2026. Line wrapping is normalized. Owner-approved spelling corrections are applied here; the unmodified source remains in `page.html`.
+
+Corrections from the published Canva copy:
+
+- `Joel Maliunag` to `Joel Maliuanag`
+- `Carisse Bettina Tabora` to `Carisse Betina Tabora`
 
 ## Invitation Hero
 
@@ -69,7 +74,7 @@ light and bright colored suit and ties or barongs
 
 ### Principal Sponsors
 
-- Joel Maliunag
+- Joel Maliuanag
 - Mela Vicente
 - Chimmy Tapia
 - Sarji Ruiz
@@ -117,7 +122,7 @@ light and bright colored suit and ties or barongs
 - Alonsina Garcia
 - Ana Paulina Tanquilut
 - Bettina Louise Francisco
-- Carisse Bettina Tabora
+- Carisse Betina Tabora
 - Jacqueline Dizon
 
 ### Ring Bearer

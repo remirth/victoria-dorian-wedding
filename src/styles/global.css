@@ -1,1 +1,19 @@
+@import "@fontsource/pinyon-script/latin-400.css";
+@import "@fontsource-variable/playfair-display/wght.css";
+@import "@fontsource-variable/playfair-display/wght-italic.css";
+@import "@fontsource-variable/urbanist/wght.css";
 @import "tailwindcss";
+
+@theme {
+  --font-script: "Pinyon Script", cursive;
+  --font-serif: "Playfair Display Variable", Georgia, serif;
+  --font-sans: "Urbanist Variable", Arial, sans-serif;
+
+  --color-invitation-ivory: #fbf7f1;
+  --color-invitation-gold: #f4c067;
+  --color-invitation-champagne: #fffae3;
+  --color-invitation-berry: #b30221;
+  --color-invitation-terracotta: #c64d2e;
+  --color-invitation-navy: #1f244c;
+  --color-invitation-blue: #455b97;
+}
