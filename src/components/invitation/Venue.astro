@@ -1,11 +1,17 @@
 ---
 import Scene from "./Scene.astro";
+import DecorativeCutout from "./DecorativeCutout.astro";
 import { invitation } from "../../content/invitation";
 import { invitationAssets } from "../../content/invitation-assets";
 ---
 
-<Scene id="ceremony-and-reception" image={invitationAssets.ceremony.couple} positionMobile="30% 45%">
-  <div class="ml-auto max-w-2xl">
+<Scene id="ceremony-and-reception" image={invitationAssets.ceremony.couple} positionMobile="30% 45%" motion="wipe depth">
+  <DecorativeCutout
+    slot="foreground"
+    src={invitationAssets.ceremony.cutout.src}
+    class="bottom-[-5%] left-[-12%] w-[58%] opacity-65 lg:left-[-6%] lg:w-[50%] lg:opacity-85"
+  />
+  <div class="ml-auto max-w-2xl" data-reveal="body">
     <h2 class="text-sparkle font-script text-6xl sm:text-7xl">{invitation.ceremony.title}</h2>
     <address class="mt-4 font-sans text-sm not-italic tracking-wider uppercase">
       {invitation.venue.name}<br />{invitation.venue.address}

@@ -1,16 +1,22 @@
 ---
 import Scene from "./Scene.astro";
+import DecorativeCutout from "./DecorativeCutout.astro";
 import { invitation } from "../../content/invitation";
 import { invitationAssets } from "../../content/invitation-assets";
 ---
 
-<Scene id="beginning" image={invitationAssets.story.couple} natural minHeight="min-h-[200svh]" align="start">
+<Scene id="beginning" image={invitationAssets.story.couple} natural minHeight="min-h-[200svh]" align="start" motion="light depth">
+  <DecorativeCutout
+    slot="foreground"
+    src={invitationAssets.story.cutout.src}
+    class="right-[-8%] bottom-[-3%] max-h-[58%] w-[48%] opacity-45 lg:opacity-65"
+  />
   <div class="mx-auto max-w-2xl p-1 text-center sm:p-2">
-    <h2 class="text-sparkle font-script text-5xl leading-none sm:text-7xl">
+    <h2 class="text-sparkle font-script text-5xl leading-none sm:text-7xl" data-reveal="body">
       {invitation.story.title}
     </h2>
-    <div class="mt-8 space-y-6 font-serif text-lg leading-relaxed italic sm:text-xl">
-      {invitation.story.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    <div class="mt-8 space-y-6 font-serif text-lg leading-relaxed italic sm:text-xl" data-stagger="story">
+      {invitation.story.paragraphs.map((paragraph) => <p data-stagger-item>{paragraph}</p>)}
     </div>
   </div>
 </Scene>

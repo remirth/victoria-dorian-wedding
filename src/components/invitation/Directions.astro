@@ -5,9 +5,9 @@ import { invitationAssets } from "../../content/invitation-assets";
 import Scene from "./Scene.astro";
 ---
 
-<Scene id="finding-your-way" image={invitationAssets.directions.scene} natural>
+<Scene id="finding-your-way" image={invitationAssets.directions.scene} natural motion="wipe">
   <div class="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-    <div class="p-1 sm:p-2">
+    <div class="p-1 sm:p-2" data-reveal="body">
       <h2 class="text-sparkle font-script text-7xl leading-none sm:text-8xl">
         {invitation.directions.title}
       </h2>
@@ -25,7 +25,7 @@ import Scene from "./Scene.astro";
         Open on Google Maps
       </a>
     </div>
-    <figure>
+    <figure data-reveal="map">
       <Picture
         src={invitationAssets.directions.mapProcessed.src}
         alt={invitationAssets.directions.map.alt}

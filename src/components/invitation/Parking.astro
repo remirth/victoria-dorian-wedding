@@ -1,11 +1,17 @@
 ---
 import Scene from "./Scene.astro";
+import DecorativeCutout from "./DecorativeCutout.astro";
 import { invitation } from "../../content/invitation";
 import { invitationAssets } from "../../content/invitation-assets";
 ---
 
-<Scene id="parking-and-directions" image={invitationAssets.parking.couple} positionMobile="70% 50%">
-  <div class="max-w-xl">
+<Scene id="parking-and-directions" image={invitationAssets.parking.couple} positionMobile="70% 50%" motion="wipe depth">
+  <DecorativeCutout
+    slot="foreground"
+    src={invitationAssets.parking.cutout.src}
+    class="right-[-10%] bottom-[-4%] w-[58%] opacity-60 lg:right-[-4%] lg:w-[52%] lg:opacity-80"
+  />
+  <div class="max-w-xl" data-reveal="body">
     <h2 class="text-sparkle font-script text-6xl leading-none sm:text-7xl">
       {invitation.parking.title}
     </h2>

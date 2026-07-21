@@ -5,12 +5,14 @@ import { invitationAssets } from "../../content/invitation-assets";
 import Scene from "./Scene.astro";
 ---
 
-<Scene id="garden-formal" image={invitationAssets.gardenFormal.scene} minHeight="min-h-svh">
+<Scene id="garden-formal" image={invitationAssets.gardenFormal.scene} minHeight="min-h-svh" motion="wipe">
   <div class="mx-auto w-full max-w-5xl">
-    <h2 class="text-sparkle text-center font-script text-7xl sm:text-8xl">{invitation.gardenFormal.title}</h2>
-    <dl class="mx-auto mt-8 grid max-w-4xl gap-8 text-center sm:grid-cols-2">
+    <h2 class="text-sparkle text-center font-script text-7xl sm:text-8xl" data-reveal="body">
+      {invitation.gardenFormal.title}
+    </h2>
+    <dl class="mx-auto mt-8 grid max-w-4xl gap-8 text-center sm:grid-cols-2" data-stagger="attire">
       {invitation.gardenFormal.guidance.map((item) => (
-        <div>
+        <div data-stagger-item>
           <dt class="font-sans text-sm font-semibold tracking-[0.2em] text-invitation-gold uppercase">{item.label}</dt>
           <dd class="mt-2 font-serif text-lg italic">{item.description}</dd>
         </div>
@@ -24,6 +26,7 @@ import Scene from "./Scene.astro";
       sizes="(min-width: 1280px) 1152px, calc(100vw - 3rem)"
       loading="lazy"
       class="mx-auto mt-10 w-full max-w-4xl object-contain"
+      data-reveal="attire"
     />
   </div>
 </Scene>

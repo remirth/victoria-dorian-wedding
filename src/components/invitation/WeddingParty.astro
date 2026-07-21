@@ -1,17 +1,23 @@
 ---
 import Scene from "./Scene.astro";
+import DecorativeCutout from "./DecorativeCutout.astro";
 import { invitation } from "../../content/invitation";
 import { invitationAssets } from "../../content/invitation-assets";
 ---
 
-<Scene id="special-roles" image={invitationAssets.weddingParty.couple} natural>
+<Scene id="special-roles" image={invitationAssets.weddingParty.couple} natural motion="depth editorial">
+  <DecorativeCutout
+    slot="foreground"
+    src={invitationAssets.weddingParty.cutout.src}
+    class="right-[-10%] bottom-[-3%] w-[58%] opacity-20 xl:right-[-4%] xl:w-[50%] xl:opacity-40"
+  />
   <div class="mx-auto max-w-5xl">
-    <h2 class="text-sparkle text-center font-script text-7xl sm:text-8xl">
+    <h2 class="text-sparkle text-center font-script text-7xl sm:text-8xl" data-reveal="body">
       {invitation.weddingParty.title}
     </h2>
-    <div class="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="mt-12 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3" data-stagger="wedding-party">
       {invitation.weddingParty.groups.map((group) => (
-        <section class="border-t border-invitation-gold/60 pt-5 text-center">
+        <section class="border-t border-invitation-gold/60 pt-5 text-center" data-stagger-item>
           <h3 class="font-sans text-sm font-semibold tracking-[0.18em] text-invitation-gold uppercase">
             {group.role}
           </h3>

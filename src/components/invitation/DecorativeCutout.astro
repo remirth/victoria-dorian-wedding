@@ -1,0 +1,22 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  src: ImageMetadata;
+  class?: string;
+}
+
+const { src, class: className } = Astro.props;
+---
+
+<Image
+  src={src}
+  alt=""
+  aria-hidden="true"
+  loading="lazy"
+  width={1200}
+  format="webp"
+  class:list={["pointer-events-none absolute z-0 hidden object-contain lg:block", className]}
+  data-depth-layer="foreground"
+/>

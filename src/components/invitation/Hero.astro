@@ -4,12 +4,16 @@ import { invitation } from "../../content/invitation";
 import { invitationAssets } from "../../content/invitation-assets";
 ---
 
-<Scene id="invitation" image={invitationAssets.hero.couple} eager positionMobile="58% 45%" class="text-center">
-  <div class="mx-auto flex max-w-4xl flex-col items-center">
+<Scene id="invitation" image={invitationAssets.hero.couple} eager positionMobile="58% 45%" class="text-center" motion="light">
+  <div class="mx-auto flex max-w-4xl flex-col items-center" data-reveal="light">
     <p class="font-sans text-xs font-semibold tracking-[0.3em] uppercase sm:text-sm">
       {invitation.hero.eyebrow.map((line) => <span class="block">{line}</span>)}
     </p>
-    <h1 class="mt-8 font-script text-7xl leading-[0.78] text-invitation-champagne drop-shadow-lg sm:text-8xl lg:text-9xl">
+    <h1
+      class="mt-8 font-script text-7xl leading-[0.78] text-invitation-champagne drop-shadow-lg sm:text-8xl lg:text-9xl"
+      tabindex="-1"
+      data-entry-focus
+    >
       <span class="block">{invitation.couple.bride}</span>
       <span class="my-2 block text-5xl text-invitation-gold sm:text-6xl">&amp;</span>
       <span class="block">{invitation.couple.groom}</span>

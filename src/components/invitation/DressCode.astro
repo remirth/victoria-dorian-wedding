@@ -1,20 +1,29 @@
 ---
 import Scene from "./Scene.astro";
+import DecorativeCutout from "./DecorativeCutout.astro";
 import { invitation } from "../../content/invitation";
 import { invitationAssets } from "../../content/invitation-assets";
 ---
 
-<Scene id="dress-code" image={invitationAssets.dressCode.couple} positionMobile="30% 45%">
+<Scene id="dress-code" image={invitationAssets.dressCode.couple} positionMobile="30% 45%" motion="wipe depth">
+  <DecorativeCutout
+    slot="foreground"
+    src={invitationAssets.dressCode.cutout.src}
+    class="bottom-[-4%] left-[-12%] w-[56%] opacity-55 lg:left-[-5%] lg:w-[48%] lg:opacity-80"
+  />
   <div class="ml-auto max-w-2xl">
-    <h2 class="text-sparkle font-script text-6xl sm:text-7xl">{invitation.dressCode.title}</h2>
+    <h2 class="text-sparkle font-script text-6xl sm:text-7xl" data-reveal="body">{invitation.dressCode.title}</h2>
     <p class="mt-6 font-serif text-lg leading-relaxed italic">
       {invitation.dressCode.introduction.map((segment) => (
         <span class:list={[segment.accent === "gold" && "text-invitation-gold"]}>{segment.text}</span>
       ))}
     </p>
-    <ul class="mt-7 grid max-w-lg grid-cols-2 gap-3 font-sans text-sm font-semibold tracking-wider uppercase sm:grid-cols-4">
+    <ul
+      class="mt-7 grid max-w-lg grid-cols-2 gap-3 font-sans text-sm font-semibold tracking-wider uppercase sm:grid-cols-4"
+      data-stagger="dress-code"
+    >
       {invitation.dressCode.excludedColors.map((color) => (
-        <li class="flex flex-col items-center gap-2 border border-invitation-champagne/60 bg-black/35 px-3 py-4 text-center">
+        <li class="flex flex-col items-center gap-2 border border-invitation-champagne/60 bg-black/35 px-3 py-4 text-center" data-stagger-item>
           <span
             aria-hidden="true"
             class="size-10 rounded-full border border-invitation-champagne/40 shadow-inner"

@@ -3,6 +3,7 @@ import { getImage } from "astro:assets";
 import Closing from "../components/invitation/Closing.astro";
 import Directions from "../components/invitation/Directions.astro";
 import DressCode from "../components/invitation/DressCode.astro";
+import EnvelopeIntro from "../components/invitation/EnvelopeIntro";
 import Faq from "../components/invitation/Faq.astro";
 import GardenFormal from "../components/invitation/GardenFormal.astro";
 import Gifts from "../components/invitation/Gifts.astro";
@@ -31,7 +32,16 @@ const socialImage = new URL(socialImageAsset.src, Astro.site);
 ---
 
 <Layout {title} {description} {canonical} {socialImage}>
-  <main>
+  <script is:inline>
+    document.documentElement.dataset.invitationEnhanced = "true";
+    let invitationOpened = location.hash === "#invitation";
+    try {
+      invitationOpened ||= sessionStorage.getItem("victoria-dorian-invitation-opened") === "true";
+    } catch {}
+    if (invitationOpened) document.documentElement.dataset.invitationOpened = "true";
+  </script>
+  <EnvelopeIntro client:load />
+  <main data-invitation-document>
     <Hero />
     <Story />
     <Venue />
@@ -45,4 +55,7 @@ const socialImage = new URL(socialImageAsset.src, Astro.site);
     <Closing />
     <Directions />
   </main>
+  <script>
+    import "../scripts/scene-motion";
+  </script>
 </Layout>
