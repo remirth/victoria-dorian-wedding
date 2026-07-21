@@ -11,7 +11,8 @@
     "lint:fix": "oxlint --fix",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
-    "deploy": "astro build && wrangler pages deploy --project-name=victoria-dorian-wedding"
+    "deploy": "astro build && wrangler pages deploy --project-name=victoria-dorian-wedding",
+    "deploy:beta": "astro build && wrangler pages deploy --project-name=victoria-dorian-wedding-beta"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.1",
