@@ -43,3 +43,9 @@
     color: var(--color-invitation-navy);
   }
 }
+
+@utility text-sparkle {
+  filter: drop-shadow(rgba(255, 228, 105, 0.95) 0px 0px 1.26731px)
+    drop-shadow(rgba(255, 242, 182, 0.75) 0px 0px 6.33654px)
+    drop-shadow(rgba(255, 242, 182, 0.44) 0px 0px 19.0096px);
+}

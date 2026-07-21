@@ -7,12 +7,14 @@ import directionsConvertibleProcessed from "../assets/invitation/directions/conv
 import directionsConvertible from "../assets/invitation/directions/convertible.jpg";
 import directionsMapProcessed from "../assets/invitation/directions/map-processed.png";
 import directionsMap from "../assets/invitation/directions/map.png";
+import directionsScene from "../assets/invitation/directions/scene.jpg";
 import dressCodeCouple from "../assets/invitation/dress-code/couple-embrace.jpg";
 import dressCodeCutout from "../assets/invitation/dress-code/couple-cutout.png";
 import faqSparklers from "../assets/invitation/faq/sparklers.jpg";
 import gardenFormalFull from "../assets/invitation/garden-formal/full-lineup.png";
 import gardenFormalGentlemen from "../assets/invitation/garden-formal/gentlemen-lineup.png";
 import gardenFormalLadies from "../assets/invitation/garden-formal/ladies-lineup.png";
+import gardenFormalLineup from "../assets/invitation/garden-formal/full-lineup-transparent.png";
 import giftsSparklers from "../assets/invitation/gifts/sparklers.jpg";
 import heroCouple from "../assets/invitation/hero/couple-ring.jpg";
 import legacyHeroArtwork from "../assets/invitation/hero/names-date.png";
@@ -67,6 +69,10 @@ export const invitationAssets = {
   },
   gardenFormal: {
     fullLineup: asset(gardenFormalFull, "Examples of pastel garden-formal attire"),
+    lineup: asset(
+      gardenFormalLineup,
+      "Examples of pastel garden-formal attire for ladies and gentlemen",
+    ),
     ladies: asset(gardenFormalLadies, "Examples of pastel garden-formal attire for women"),
     gentlemen: asset(gardenFormalGentlemen, "Examples of light garden-formal attire for men"),
   },
@@ -97,6 +103,11 @@ export const invitationAssets = {
       "50% 50%",
     ),
     convertibleProcessed: asset(directionsConvertibleProcessed, ""),
+    scene: asset(
+      directionsScene,
+      "Victoria and Dorian on the road, traveling to the venue",
+      "50% 45%",
+    ),
     map: asset(directionsMap, "Map showing the route to Narra Hill Tagaytay"),
     mapProcessed: asset(directionsMapProcessed, ""),
   },

@@ -6,7 +6,7 @@ import { invitationAssets } from "../../content/invitation-assets";
 
 <Scene id="dress-code" image={invitationAssets.dressCode.couple}>
   <div class="max-w-2xl">
-    <h2 class="font-script text-6xl text-invitation-gold sm:text-7xl">{invitation.dressCode.title}</h2>
+    <h2 class="text-sparkle font-script text-6xl sm:text-7xl">{invitation.dressCode.title}</h2>
     <p class="mt-6 font-serif text-lg leading-relaxed italic">{invitation.dressCode.introduction}</p>
     <ul class="mt-6 grid max-w-lg grid-cols-2 gap-3 font-sans text-sm font-semibold tracking-wider uppercase">
       {invitation.dressCode.excludedColors.map((color) => (
