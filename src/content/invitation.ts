@@ -2,6 +2,7 @@ export interface VenueDetails {
   shortName: string;
   name: string;
   address: string;
+  mapsUrl: string;
 }
 
 export interface WeddingPartyGroup {
@@ -39,6 +40,7 @@ export const invitation = {
     shortName: "Narra Hill, Batangas",
     name: "Narra Hill Tagaytay",
     address: "Barangay Niyugan, Laurel, Batangas, Philippines",
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Narra%20Hill%20Tagaytay",
   } satisfies VenueDetails,
   hero: {
     eyebrow: ["You are invited", "to the wedding of"],
