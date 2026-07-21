@@ -7,7 +7,7 @@ import Scene from "./Scene.astro";
 
 <Scene id="finding-your-way" image={invitationAssets.directions.scene} natural>
   <div class="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-    <div class="rounded-sm bg-invitation-navy/70 p-7 backdrop-blur-[2px] sm:p-10">
+    <div class="p-1 sm:p-2">
       <h2 class="text-sparkle font-script text-7xl leading-none sm:text-8xl">
         {invitation.directions.title}
       </h2>
@@ -19,13 +19,13 @@ import Scene from "./Scene.astro";
     </div>
     <figure>
       <Picture
-        src={invitationAssets.directions.map.src}
+        src={invitationAssets.directions.mapProcessed.src}
         alt={invitationAssets.directions.map.alt}
         formats={["avif", "webp"]}
         widths={[480, 768, 1024, 1440]}
         sizes="(min-width: 1024px) 60vw, calc(100vw - 3rem)"
         loading="lazy"
-        class="w-full rounded-sm bg-invitation-ivory object-contain shadow-2xl"
+        class="w-full object-contain"
       />
       <figcaption class="mt-3 font-sans text-xs tracking-wide text-invitation-champagne/80">
         Route map with landmarks including {invitation.directions.mapLandmarks.join(", ")}.

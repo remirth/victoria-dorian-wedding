@@ -14,6 +14,18 @@ export interface FaqItem {
   answer: string;
 }
 
+export type TextAccent = "gold" | "danger";
+
+export interface TextSegment {
+  text: string;
+  accent?: TextAccent;
+}
+
+export interface ExcludedColor {
+  name: string;
+  color: string;
+}
+
 export const invitation = {
   couple: {
     bride: "Victoria",
@@ -56,9 +68,19 @@ export const invitation = {
   },
   dressCode: {
     title: "Dress Code",
-    introduction:
-      "We kindly invite you to wear your most comfortable garden formal look. We dress to impress, but we kindly ask that you refrain from wearing the following colors to complement the theme of our special day:",
-    excludedColors: ["Black", "White", "Royal Blue", "Dark Blue"],
+    introduction: [
+      { text: "We kindly invite you to wear your most " },
+      { text: "comfortable garden formal look", accent: "gold" },
+      {
+        text: ". We dress to impress, but we kindly ask that you refrain from wearing the following colors to complement the theme of our special day:",
+      },
+    ] as readonly TextSegment[],
+    excludedColors: [
+      { name: "Black", color: "rgb(0, 0, 0)" },
+      { name: "White", color: "rgb(255, 255, 255)" },
+      { name: "Royal Blue", color: "rgb(75, 82, 138)" },
+      { name: "Dark Blue", color: "rgb(61, 62, 103)" },
+    ] as readonly ExcludedColor[],
     closing: "Thank you for helping us keep the celebration beautifully coordinated.",
   },
   gardenFormal: {

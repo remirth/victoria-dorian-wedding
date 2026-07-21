@@ -15,6 +15,7 @@ import gardenFormalFull from "../assets/invitation/garden-formal/full-lineup.png
 import gardenFormalGentlemen from "../assets/invitation/garden-formal/gentlemen-lineup.png";
 import gardenFormalLadies from "../assets/invitation/garden-formal/ladies-lineup.png";
 import gardenFormalLineup from "../assets/invitation/garden-formal/full-lineup-transparent.png";
+import gardenFormalScene from "../assets/invitation/garden-formal/scene.jpg";
 import giftsSparklers from "../assets/invitation/gifts/sparklers.jpg";
 import heroCouple from "../assets/invitation/hero/couple-ring.jpg";
 import legacyHeroArtwork from "../assets/invitation/hero/names-date.png";
@@ -72,6 +73,11 @@ export const invitationAssets = {
     lineup: asset(
       gardenFormalLineup,
       "Examples of pastel garden-formal attire for ladies and gentlemen",
+    ),
+    scene: asset(
+      gardenFormalScene,
+      "Victoria and Dorian in a garden, framed for garden-formal attire guidance",
+      "50% 45%",
     ),
     ladies: asset(gardenFormalLadies, "Examples of pastel garden-formal attire for women"),
     gentlemen: asset(gardenFormalGentlemen, "Examples of light garden-formal attire for men"),

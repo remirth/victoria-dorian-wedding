@@ -5,12 +5,23 @@ import { invitationAssets } from "../../content/invitation-assets";
 ---
 
 <Scene id="dress-code" image={invitationAssets.dressCode.couple}>
-  <div class="max-w-2xl">
+  <div class="ml-auto max-w-2xl">
     <h2 class="text-sparkle font-script text-6xl sm:text-7xl">{invitation.dressCode.title}</h2>
-    <p class="mt-6 font-serif text-lg leading-relaxed italic">{invitation.dressCode.introduction}</p>
-    <ul class="mt-6 grid max-w-lg grid-cols-2 gap-3 font-sans text-sm font-semibold tracking-wider uppercase">
+    <p class="mt-6 font-serif text-lg leading-relaxed italic">
+      {invitation.dressCode.introduction.map((segment) => (
+        <span class:list={[segment.accent === "gold" && "text-invitation-gold"]}>{segment.text}</span>
+      ))}
+    </p>
+    <ul class="mt-7 grid max-w-lg grid-cols-2 gap-3 font-sans text-sm font-semibold tracking-wider uppercase sm:grid-cols-4">
       {invitation.dressCode.excludedColors.map((color) => (
-        <li class="border border-invitation-champagne/60 bg-black/35 px-4 py-3 text-center">{color}</li>
+        <li class="flex flex-col items-center gap-2 border border-invitation-champagne/60 bg-black/35 px-3 py-4 text-center">
+          <span
+            aria-hidden="true"
+            class="size-10 rounded-full border border-invitation-champagne/40 shadow-inner"
+            style={`background-color: ${color.color}`}
+          />
+          <span>{color.name}</span>
+        </li>
       ))}
     </ul>
     <p class="mt-6 font-serif text-lg leading-relaxed italic">{invitation.dressCode.closing}</p>

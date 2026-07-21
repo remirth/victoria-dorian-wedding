@@ -11,17 +11,29 @@ interface Props {
   };
   natural?: boolean;
   eager?: boolean;
+  minHeight?: string;
+  align?: "center" | "start";
   class?: string;
 }
 
-const { id, image, natural = false, eager = false, class: className } = Astro.props;
+const {
+  id,
+  image,
+  natural = false,
+  eager = false,
+  minHeight = "min-h-svh",
+  align = "center",
+  class: className,
+} = Astro.props;
 ---
 
 <section
   id={id}
   class:list={[
     "relative isolate flex overflow-hidden bg-invitation-navy text-invitation-ivory",
-    natural ? "min-h-svh py-20 sm:py-28" : "min-h-svh items-center py-16 sm:py-24",
+    minHeight,
+    align === "center" ? "items-center" : "items-start",
+    natural ? "py-20 sm:py-28" : "py-16 sm:py-24",
     className,
   ]}
 >
@@ -36,7 +48,7 @@ const { id, image, natural = false, eager = false, class: className } = Astro.pr
     class="absolute inset-0 -z-20 size-full object-cover"
     style={`object-position: ${image.position ?? "50% 50%"}`}
   />
-  <div class="absolute inset-0 -z-10 bg-linear-to-b from-black/40 via-black/55 to-black/75"></div>
+  <div class="absolute inset-0 -z-10 bg-linear-to-b from-black/25 via-black/40 to-black/65"></div>
   <div class="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-16">
     <slot />
   </div>

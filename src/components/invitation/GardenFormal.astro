@@ -2,15 +2,16 @@
 import { Picture } from "astro:assets";
 import { invitation } from "../../content/invitation";
 import { invitationAssets } from "../../content/invitation-assets";
+import Scene from "./Scene.astro";
 ---
 
-<section id="garden-formal" class="flex min-h-svh items-center bg-invitation-ivory py-16 text-invitation-navy sm:py-24">
-  <div class="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-16">
-    <h2 class="text-center font-script text-7xl text-invitation-berry sm:text-8xl">{invitation.gardenFormal.title}</h2>
+<Scene id="garden-formal" image={invitationAssets.gardenFormal.scene} minHeight="min-h-svh">
+  <div class="mx-auto w-full max-w-5xl">
+    <h2 class="text-sparkle text-center font-script text-7xl sm:text-8xl">{invitation.gardenFormal.title}</h2>
     <dl class="mx-auto mt-8 grid max-w-4xl gap-8 text-center sm:grid-cols-2">
       {invitation.gardenFormal.guidance.map((item) => (
         <div>
-          <dt class="font-sans text-sm font-semibold tracking-[0.2em] uppercase">{item.label}</dt>
+          <dt class="font-sans text-sm font-semibold tracking-[0.2em] text-invitation-gold uppercase">{item.label}</dt>
           <dd class="mt-2 font-serif text-lg italic">{item.description}</dd>
         </div>
       ))}
@@ -22,7 +23,7 @@ import { invitationAssets } from "../../content/invitation-assets";
       widths={[480, 768, 1024, 1440]}
       sizes="(min-width: 1280px) 1152px, calc(100vw - 3rem)"
       loading="lazy"
-      class="mx-auto mt-10 w-full max-w-6xl object-contain"
+      class="mx-auto mt-10 w-full max-w-4xl object-contain"
     />
   </div>
-</section>
+</Scene>
