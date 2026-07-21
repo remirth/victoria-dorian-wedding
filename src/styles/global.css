@@ -272,6 +272,7 @@
     left: 7%;
     display: grid;
     height: 88%;
+    overflow: hidden;
     place-content: center;
     gap: 0.85rem;
     border: 1px solid rgb(180 133 51 / 55%);
@@ -281,8 +282,26 @@
     box-shadow: 0 0.4rem 1rem rgb(55 30 18 / 18%);
   }
 
+  .envelope__card::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgb(31 36 76 / 8%), rgb(31 36 76 / 68%));
+    content: "";
+  }
+
+  .envelope__card-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 45%;
+  }
+
   .envelope__monogram {
-    color: var(--color-invitation-berry);
+    position: relative;
+    z-index: 1;
+    color: var(--color-invitation-champagne);
     font-family: var(--font-script);
     font-size: clamp(2.5rem, 9vw, 4.8rem);
     line-height: 1;
@@ -294,7 +313,9 @@
   }
 
   .envelope__date {
-    color: var(--color-invitation-navy);
+    position: relative;
+    z-index: 1;
+    color: var(--color-invitation-champagne);
     font-family: var(--font-sans);
     font-size: clamp(0.55rem, 1.7vw, 0.72rem);
     font-weight: 600;

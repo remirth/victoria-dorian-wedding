@@ -28,6 +28,11 @@ const socialImageAsset = await getImage({
   position: "center",
   format: "jpeg",
 });
+const envelopeImageAsset = await getImage({
+  src: invitationAssets.hero.couple.src,
+  width: 480,
+  format: "webp",
+});
 const socialImage = new URL(socialImageAsset.src, Astro.site);
 ---
 
@@ -40,7 +45,7 @@ const socialImage = new URL(socialImageAsset.src, Astro.site);
     } catch {}
     if (invitationOpened) document.documentElement.dataset.invitationOpened = "true";
   </script>
-  <EnvelopeIntro client:load />
+  <EnvelopeIntro heroImageSrc={envelopeImageAsset.src} client:load />
   <main data-invitation-document>
     <Hero />
     <Story />

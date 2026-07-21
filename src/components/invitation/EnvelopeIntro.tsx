@@ -6,7 +6,11 @@ const STORAGE_KEY = "victoria-dorian-invitation-opened";
 
 type Phase = "cover" | "opening" | "opened";
 
-export default function EnvelopeIntro() {
+interface Props {
+  heroImageSrc: string;
+}
+
+export default function EnvelopeIntro({ heroImageSrc }: Props) {
   const reduceMotion = useReducedMotion();
   const [hydrated, setHydrated] = useState(false);
   const [phase, setPhase] = useState<Phase>("cover");
@@ -166,6 +170,14 @@ export default function EnvelopeIntro() {
                       },
                 }}
               >
+                <img
+                  className="envelope__card-image"
+                  src={heroImageSrc}
+                  alt=""
+                  aria-hidden="true"
+                  loading="eager"
+                  fetchPriority="high"
+                />
                 <span className="envelope__monogram">
                   V <i>&amp;</i> D
                 </span>
