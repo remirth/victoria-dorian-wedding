@@ -9,5 +9,6 @@
   "env": {
     "builtin": true,
     "browser": true
-  }
+  },
+  "ignorePatterns": ["reference/envelope/letter-animation.tsx"]
 }
