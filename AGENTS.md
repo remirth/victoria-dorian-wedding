@@ -8,6 +8,16 @@ astro dev --background
 
 Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
 
+## Tooling
+
+- **Linting**: `pnpm lint` (oxlint, config in `.oxlintrc.json`). Auto-fix with `pnpm lint:fix`.
+- **Formatting**: `pnpm format` (oxfmt, config in `.oxfmtrc.json`). Verify with `pnpm format:check`.
+- **Type checking**: `pnpm astro check` (uses `astro/tsconfigs/strict`).
+- **Build**: `pnpm build` outputs a fully static site to `dist/`.
+- **Deploy**: `pnpm deploy` builds then deploys to Cloudflare Pages via `wrangler pages deploy`.
+
+Always run `pnpm lint`, `pnpm format:check`, and `pnpm astro check` before finishing non-trivial work.
+
 ## Documentation
 
 Full documentation: https://docs.astro.build
