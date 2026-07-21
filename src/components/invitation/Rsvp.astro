@@ -1,0 +1,25 @@
+---
+import Scene from "./Scene.astro";
+import { invitation } from "../../content/invitation";
+import { invitationAssets } from "../../content/invitation-assets";
+---
+
+<Scene id="rsvp" image={invitationAssets.rsvp.couple}>
+  <div class="mx-auto max-w-2xl text-center">
+    <h2 class="font-script text-8xl text-invitation-gold sm:text-9xl">{invitation.rsvp.title}</h2>
+    <p class="mt-6 font-serif text-lg leading-relaxed italic sm:text-xl">{invitation.rsvp.copy}</p>
+    <a
+      href={invitation.rsvp.link}
+      target="_blank"
+      rel="noreferrer"
+      class="mt-8 inline-flex min-h-11 items-center justify-center border border-invitation-gold bg-invitation-gold px-7 py-3 font-sans text-sm font-semibold tracking-[0.16em] text-invitation-navy uppercase hover:bg-invitation-champagne focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-invitation-champagne"
+    >
+      {invitation.rsvp.linkLabel}
+    </a>
+    <p class="mt-8 font-sans text-xs font-semibold tracking-[0.18em] uppercase">
+      The form closes on<br /><time datetime="2026-07-31T23:59:00+08:00" class="mt-1 inline-block text-base text-invitation-gold">
+        {invitation.rsvp.deadline}
+      </time>
+    </p>
+  </div>
+</Scene>

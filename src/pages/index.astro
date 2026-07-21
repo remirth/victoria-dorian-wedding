@@ -1,11 +1,48 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { getImage } from "astro:assets";
+import Closing from "../components/invitation/Closing.astro";
+import Directions from "../components/invitation/Directions.astro";
+import DressCode from "../components/invitation/DressCode.astro";
+import Faq from "../components/invitation/Faq.astro";
+import GardenFormal from "../components/invitation/GardenFormal.astro";
+import Gifts from "../components/invitation/Gifts.astro";
+import Hero from "../components/invitation/Hero.astro";
+import Parking from "../components/invitation/Parking.astro";
+import Rsvp from "../components/invitation/Rsvp.astro";
+import Story from "../components/invitation/Story.astro";
+import Venue from "../components/invitation/Venue.astro";
+import WeddingParty from "../components/invitation/WeddingParty.astro";
+import { invitationAssets } from "../content/invitation-assets";
+import Layout from "../layouts/Layout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const title = "Victoria & Dorian | Wedding Invitation";
+const description =
+  "Join Victoria and Dorian for their wedding at Narra Hill, Batangas on 29 September 2026.";
+const canonical = new URL("/", Astro.site);
+const socialImageAsset = await getImage({
+  src: invitationAssets.hero.couple.src,
+  width: 1200,
+  height: 630,
+  fit: "cover",
+  position: "center",
+  format: "jpeg",
+});
+const socialImage = new URL(socialImageAsset.src, Astro.site);
 ---
 
-<Layout>
-	<Welcome />
+<Layout {title} {description} {canonical} {socialImage}>
+  <main>
+    <Hero />
+    <Story />
+    <Venue />
+    <Parking />
+    <DressCode />
+    <GardenFormal />
+    <WeddingParty />
+    <Rsvp />
+    <Gifts />
+    <Faq />
+    <Closing />
+    <Directions />
+  </main>
 </Layout>

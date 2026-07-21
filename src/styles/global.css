@@ -17,3 +17,29 @@
   --color-invitation-navy: #1f244c;
   --color-invitation-blue: #455b97;
 }
+
+@layer base {
+  html {
+    background: var(--color-invitation-navy);
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background: var(--color-invitation-navy);
+    color: var(--color-invitation-ivory);
+    font-family: var(--font-serif);
+    text-rendering: optimizeLegibility;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-invitation-gold);
+    outline-offset: 4px;
+  }
+
+  ::selection {
+    background: var(--color-invitation-gold);
+    color: var(--color-invitation-navy);
+  }
+}
